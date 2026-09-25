@@ -54,3 +54,6 @@ GROUP BY c.region;
 SELECT p.product_name, SUM(o.sales) AS celkova_hodnota FROM products p
 LEFT JOIN orders o ON p.product_id = o.product_id
 GROUP BY p.product_name;
+
+SELECT c.customer_name, o.order_id, o.sales FROM orders o
+FULL OUTER JOIN customers c ON o.customer_id = c.customer_id;
