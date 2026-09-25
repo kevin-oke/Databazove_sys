@@ -61,3 +61,7 @@ FULL OUTER JOIN customers c ON o.customer_id = c.customer_id;
 SELECT c.region, SUM(o.sales) AS pocet FROM customers c
 INNER JOIN orders o ON c.customer_id = o.customer_id
 GROUP BY c.region;
+
+SELECT c.customer_name, COUNT(o.order_id) AS pocet FROM customers c
+LEFT JOIN orders o ON c.customer_id = o.customer_id
+GROUP BY c.customer_name;
