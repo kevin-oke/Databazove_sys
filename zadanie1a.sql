@@ -78,3 +78,10 @@ HAVING SUM(o.sales) > 2000;
 SELECT c.region, SUM(o.sales) AS celkovy_predaj, AVG(o.discount) AS priemerna_zlava, COUNT(o.order_id) AS pocet_objednavok FROM customers c
 INNER JOIN orders o ON c.customer_id = o.customer_id
 GROUP BY c.region;
+
+SELECT c.region,
+       COUNT(CASE WHEN o.sales > 1000 THEN 1 END) AS high_value,
+       COUNT(CASE WHEN o.sales <= 1000 THEN 1 END) AS low_value
+FROM customers c
+INNER JOIN orders o ON c.customer_id = o.customer_id
+GROUP BY c.region;
