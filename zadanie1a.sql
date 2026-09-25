@@ -57,3 +57,7 @@ GROUP BY p.product_name;
 
 SELECT c.customer_name, o.order_id, o.sales FROM orders o
 FULL OUTER JOIN customers c ON o.customer_id = c.customer_id;
+
+SELECT c.region, SUM(o.sales) AS pocet FROM customers c
+INNER JOIN orders o ON c.customer_id = o.customer_id
+GROUP BY c.region;
