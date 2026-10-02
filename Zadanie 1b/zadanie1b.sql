@@ -37,3 +37,6 @@ SELECT product_name, total_amount, (total_amount / (SELECT SUM(total_amount) FRO
 
 SELECT  month, monthly_sales FROM (SELECT EXTRACT(MONTH FROM sale_date) AS month, SUM(total_amount) AS monthly_sales FROM flourmills_sales GROUP BY month)
 ORDER BY monthly_sales DESC;
+
+SELECT product_category FROM (SELECT product_category, SUM(total_amount) AS total_sales FROM flourmills_sales GROUP BY product_category)
+WHERE total_sales > 50000000 ORDER BY total_sales DESC;
