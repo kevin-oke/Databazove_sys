@@ -70,3 +70,12 @@ SELECT product_name, region, total_amount, (
     FROM flourmills_sales t2
     WHERE t2.region = t1.region) AS region_min_amount
 FROM flourmills_sales t1;
+
+SELECT product_name FROM flourmills_sales t1
+WHERE EXISTS (
+    SELECT 1
+    FROM flourmills_sales t2
+    WHERE t2.product_name = t1.product_name
+    GROUP BY t2.product_name
+    HAVING COUNT(DISTINCT EXTRACT(MONTH FROM t2.sale_date)) > 1
+);
