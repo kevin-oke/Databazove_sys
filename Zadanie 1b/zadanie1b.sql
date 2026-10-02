@@ -30,3 +30,5 @@ WHERE total_amount > (SELECT AVG(total_amount) FROM flourmills_sales);
 
 SELECT * FROM flourmills_sales
 WHERE product_category = (SELECT product_category FROM flourmills_sales GROUP BY product_category ORDER BY SUM(total_amount) DESC LIMIT 1);
+
+SELECT product_name, total_amount, (SELECT AVG(total_amount) AS priemer FROM flourmills_sales) FROM flourmills_sales;
