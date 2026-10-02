@@ -26,21 +26,47 @@ CREATE TABLE flourmills_sales (
 SELECT * FROM flourmills_sales;
 
 SELECT product_name, total_amount FROM flourmills_sales
-WHERE total_amount > (SELECT AVG(total_amount) FROM flourmills_sales);
+WHERE total_amount > (
+    SELECT AVG(total_amount) 
+    FROM flourmills_sales);
 
 SELECT * FROM flourmills_sales
-WHERE product_category = (SELECT product_category FROM flourmills_sales GROUP BY product_category ORDER BY SUM(total_amount) DESC LIMIT 1);
+WHERE product_category = (
+    SELECT product_category 
+    FROM flourmills_sales 
+    GROUP BY product_category 
+    ORDER BY SUM(total_amount) 
+    DESC 
+    LIMIT 1);
 
-SELECT product_name, total_amount, (SELECT AVG(total_amount) AS priemer FROM flourmills_sales) FROM flourmills_sales;
+SELECT product_name, total_amount, (
+    SELECT AVG(total_amount) AS priemer 
+    FROM flourmills_sales) 
+FROM flourmills_sales;
 
-SELECT product_name, total_amount, (total_amount / (SELECT SUM(total_amount) FROM flourmills_sales)) AS amount_share FROM flourmills_sales;
+SELECT product_name, total_amount, (total_amount / (
+    SELECT SUM(total_amount) 
+    FROM flourmills_sales)) AS amount_share 
+FROM flourmills_sales;
 
-SELECT  month, monthly_sales FROM (SELECT EXTRACT(MONTH FROM sale_date) AS month, SUM(total_amount) AS monthly_sales FROM flourmills_sales GROUP BY month)
+SELECT  month, monthly_sales FROM (
+    SELECT EXTRACT(MONTH FROM sale_date) AS month, SUM(total_amount) AS monthly_sales 
+    FROM flourmills_sales GROUP BY month)
 ORDER BY monthly_sales DESC;
 
-SELECT product_category FROM (SELECT product_category, SUM(total_amount) AS total_sales FROM flourmills_sales GROUP BY product_category)
+SELECT product_category FROM (
+    SELECT product_category, SUM(total_amount) AS total_sales 
+    FROM flourmills_sales GROUP BY product_category)
 WHERE total_sales > 50000000 ORDER BY total_sales DESC;
 
 SELECT product_name, product_category, total_amount FROM flourmills_sales t1
-WHERE total_amount > (SELECT AVG(total_amount) FROM flourmills_sales t2 WHERE t2.product_category = t1.product_category);
+WHERE total_amount > (
+    SELECT AVG(total_amount) 
+    FROM flourmills_sales t2 
+    WHERE t2.product_category = t1.product_category);
 
+SELECT product_name, region, total_amount, (
+    SELECT MIN(t2.total_amount)
+    FROM flourmills_sales t2
+    WHERE t2.region = t1.region) AS region_min_amount
+FROM flourmills_sales t1;
