@@ -97,3 +97,12 @@ WHERE EXISTS(
     GROUP BY t2.product_category
     HAVING COUNT(DISTINCT region) > 3
 );
+
+SELECT t1.product_name, t1.region, t1.total_amount
+FROM flourmills_sales t1
+WHERE EXISTS (
+    SELECT 1
+    FROM flourmills_sales t2
+    WHERE t2.region = t1.region
+    AND EXTRACT(YEAR FROM t2.sale_date) = 2024
+);
