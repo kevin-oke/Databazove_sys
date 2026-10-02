@@ -22,3 +22,9 @@ CREATE TABLE flourmills_sales (
     production_date DATE,
     total_amount NUMERIC(10,2)
 );
+
+SELECT * FROM flourmills_sales;
+
+SELECT product_name, total_amount FROM flourmills_sales
+WHERE total_amount > (SELECT AVG(total_amount) FROM flourmills_sales);
+
