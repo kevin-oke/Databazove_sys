@@ -1,9 +1,0 @@
-Rule,InvalidRows
-Invalid OrderID,22
-Invalid Region,0
-Invalid Product,31
-Invalid Quantity,29
-Invalid SalesAmount,52
-Invalid Discount,29
-Invalid OrderDate,17
-Invalid DeliveryDate,25
